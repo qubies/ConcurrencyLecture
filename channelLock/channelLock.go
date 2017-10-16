@@ -11,37 +11,37 @@ func addToInt(A *int) {
 
 func main() {
 
-	IGo := make(chan int)
-	YouGo := make(chan int)
-	IDone := make(chan int)
-	YouDone := make(chan int)
+	Go := make(chan int)
+	Done := make(chan int)
 
 	A := 0
 
 	go func() {
 		for i := 0; i < 10000000; i++ {
-			<-IGo
+			<-Go
 			addToInt(&A)
-			YouGo <- 1
+			Go <- 1
 		}
-		IDone <- 1
+		fmt.Println(1)
+		Done <- 1
 	}()
 
 	go func() {
 		for i := 0; i < 10000000; i++ {
-			<-YouGo
+			<-Go
 			addToInt(&A)
-			IGo <- 1
+			Go <- 1
 		}
-		YouDone <- 1
+		fmt.Println(2)
+		Done <- 1
 	}()
-	IGo <- 1
+	Go <- 1
 	fmt.Println("here")
-	<-IDone
-	//<-IGo
+	<-Done
 	fmt.Println("there")
-	<-YouDone
+	//<-IGo
 	fmt.Println("everywhere")
+	<-Done
 	fmt.Println(A)
 
 }
