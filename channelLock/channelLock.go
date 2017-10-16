@@ -6,11 +6,9 @@ import (
 
 func addToInt(A *int) {
 	*A++
-
 }
 
 func main() {
-
 	Go := make(chan int)
 	Done := make(chan int)
 
@@ -35,13 +33,16 @@ func main() {
 		fmt.Println(2)
 		Done <- 1
 	}()
+
 	Go <- 1
 	fmt.Println("here")
+
 	<-Done
 	fmt.Println("there")
 	//<-IGo
+
 	fmt.Println("everywhere")
 	<-Done
-	fmt.Println(A)
 
+	fmt.Println(A)
 }
