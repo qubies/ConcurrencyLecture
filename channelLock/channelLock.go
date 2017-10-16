@@ -9,16 +9,16 @@ func addToInt(A *int) {
 }
 
 func main() {
-	Go := make(chan int)
+	Handshake := make(chan int)
 	Done := make(chan int)
 
 	A := 0
 
 	go func() {
 		for i := 0; i < 10000000; i++ {
-			<-Go
+			<-Handshake
 			addToInt(&A)
-			Go <- 1
+			Handshake <- 1
 		}
 		fmt.Println(1)
 		Done <- 1
@@ -26,20 +26,20 @@ func main() {
 
 	go func() {
 		for i := 0; i < 10000000; i++ {
-			<-Go
+			<-Handshake
 			addToInt(&A)
-			Go <- 1
+			Handshake <- 1
 		}
 		fmt.Println(2)
 		Done <- 1
 	}()
 
-	Go <- 1
+	Handshake <- 1
 	fmt.Println("here")
 
 	<-Done
 	fmt.Println("there")
-	//<-IGo
+	//<-Handshake
 
 	fmt.Println("everywhere")
 	<-Done
