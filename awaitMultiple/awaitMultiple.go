@@ -35,7 +35,7 @@ func main() {
 		}
 	}
 
-	for datum := range data {
-		results = append(results, <-conn.AskGoogle(datum))
+	for datum := range conn.AskGoogle(datum) {
+		results = append(results, <-)
 	}
 }
