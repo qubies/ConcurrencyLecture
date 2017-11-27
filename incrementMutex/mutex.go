@@ -22,19 +22,15 @@ func main() {
 			lock.Unlock()
 		}
 		wg.Done()
-
 	}()
 	go func() {
 		for i := 0; i < 10000000; i++ {
 			lock.Lock()
 			addToInt(&A)
 			lock.Unlock()
-
 		}
 		wg.Done()
-
 	}()
 	wg.Wait()
 	fmt.Println(A)
-
 }

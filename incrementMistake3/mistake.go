@@ -7,7 +7,6 @@ import (
 
 func addToInt(A *int) {
 	*A++
-
 }
 
 func main() {
@@ -17,20 +16,15 @@ func main() {
 	go func() {
 		for i := 0; i < 10000000; i++ {
 			addToInt(&A)
-
 		}
 		wg.Done()
-
 	}()
 	go func() {
 		for i := 0; i < 10000000; i++ {
 			addToInt(&A)
-
 		}
 		wg.Done()
-
 	}()
 	wg.Wait()
 	fmt.Println(A)
-
 }

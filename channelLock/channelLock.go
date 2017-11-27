@@ -39,7 +39,7 @@ func main() {
 
 	<-Done
 	fmt.Println("there")
-	//<-Handshake
+	<-Handshake
 
 	fmt.Println("everywhere")
 	<-Done
